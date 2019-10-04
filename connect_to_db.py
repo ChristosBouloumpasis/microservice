@@ -1,7 +1,4 @@
 import pymysql
-from os import *
-
-
 
 def connectToDatabase():
     try:
@@ -12,7 +9,6 @@ def connectToDatabase():
     except Exception as e:
         print(e)
         db.close()
-
 
 def get_random(type):
     try:
