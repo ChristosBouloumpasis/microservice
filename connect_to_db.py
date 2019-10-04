@@ -20,7 +20,7 @@ def get_random(type):
                     order by rand()
                     limit 1"""
         parameters = (type)
-        cursor.execute(query, type)
+        cursor.execute(query, parameters)
         db.close()
         result = cursor.fetchone()
         return result["Attribute_Name"]
