@@ -1,7 +1,4 @@
 import pymysql
-from os import *
-
-
 
 def connectToDatabase():
     try:
@@ -13,17 +10,17 @@ def connectToDatabase():
         print(e)
         db.close()
 
-
 def get_random(type):
     try:
         db = connectToDatabase()
         cursor = db.cursor(pymysql.cursors.DictCursor)
         query = f"""select Attribute_Name
                     from randomiser.drink_attributes
-                    where Attribute_Type = '{type}'
+                    where Attribute_Type = %s
                     order by rand()
                     limit 1"""
-        cursor.execute(query)
+        parameters = (type)
+        cursor.execute(query, parameters)
         db.close()
         result = cursor.fetchone()
         return result["Attribute_Name"]
