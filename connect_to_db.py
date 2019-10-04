@@ -20,10 +20,11 @@ def get_random(type):
         cursor = db.cursor(pymysql.cursors.DictCursor)
         query = f"""select Attribute_Name
                     from randomiser.drink_attributes
-                    where Attribute_Type = '{type}'
+                    where Attribute_Type = %s
                     order by rand()
                     limit 1"""
-        cursor.execute(query)
+        parameters = (type)
+        cursor.execute(query, type)
         db.close()
         result = cursor.fetchone()
         return result["Attribute_Name"]
